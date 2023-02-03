@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shakeshakeundian/view/countshakeView/countshake.dart' ;
+import 'package:shakeshakeundian/view/pesertaView/pesertaview.dart' ;
+import 'package:shakeshakeundian/view/pesertaView/view_result.dart' ;
 import 'package:google_fonts/google_fonts.dart';
 /**
  *  Create by Indriyantongrh on 24/01/23
@@ -115,10 +117,8 @@ class _LoginState extends State<Login> {
                                     child: Center(
                                       child: GestureDetector(
                                         onTap: (){
-                                          setState(() {
                                             Navigator.of(context).push(new MaterialPageRoute(
-                                                builder: (BuildContext context) => Countershake()));
-                                          });
+                                                builder: (context) => Countershake()));
                                         },
                                         child: Text(
                                             "Login",
@@ -127,8 +127,50 @@ class _LoginState extends State<Login> {
                                       ),
                                     )),
                                 SizedBox(
-                                  height: 50,
+                                  height: 30,
                                 ),
+                                Container(
+                                    height: 50,
+                                    margin:
+                                    EdgeInsets.symmetric(horizontal: 15),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                       ),
+                                    child: Center(
+                                      child: GestureDetector(
+                                        onTap: (){
+                                          Navigator.of(context).push(new MaterialPageRoute(
+                                              builder: (context) => const Pesertaview()));
+                                        },
+                                        child: Text(
+                                            "Example Websocket",
+                                            style: GoogleFonts.poppins(fontSize: 18 ,color: Colors.black, fontWeight: FontWeight.w400)
+                                        ),
+                                      ),
+                                    )),
+
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Container(
+                                    height: 50,
+                                    margin:
+                                    EdgeInsets.symmetric(horizontal: 15),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Center(
+                                      child: GestureDetector(
+                                        onTap: (){
+                                          Navigator.of(context).push(new MaterialPageRoute(
+                                              builder: (context) => const ViewResult()));
+                                        },
+                                        child: Text(
+                                            "View Result",
+                                            style: GoogleFonts.poppins(fontSize: 18 ,color: Colors.black, fontWeight: FontWeight.w400)
+                                        ),
+                                      ),
+                                    )),
                               ],
                             ),
                           )
