@@ -22,6 +22,7 @@ class ViewResult extends StatefulWidget {
 class _ViewResultState extends State<ViewResult> {
   String Result = '0';
   List<String> messageList = [];
+  List<String> messageLists = ['items', 'data'];
 
   List<String> item = [] ;
   late Channel room;
@@ -30,6 +31,7 @@ class _ViewResultState extends State<ViewResult> {
   @override
   void initState() {
     super.initState();
+    print('arrau init ${item}');
     streamListener();
   }
 
@@ -46,77 +48,80 @@ class _ViewResultState extends State<ViewResult> {
 
     piesocket = PieSocket(options);
     room = piesocket.join("1");
+    room.listen("new_message", (PieSocketEvent event) {
+      var resultpesan = event;
+      setState(() {
+        item.add(event.getData());
+      });
 
-    // room.listen("system:message", (PieSocketEvent event) {
-    //
-    //   var resultpesan = event;
-    //   Result = event.toString();
-    //   print(resultpesan);
-    // });
+    });
+
+    print('array ${item}');
+
   }
 
   Stream<String> _stream() async* {
     room.listen("new_message", (PieSocketEvent event) {
       var resultpesan = event;
-      // item.add(event);
       item.add(resultpesan.getData());
-      print(resultpesan.getData());
-      print('array ${item}');
-      // messageList.add(resultpesan.getData());
-
+      print('arraydd ${item}');
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
-    List<String> items = [];
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Result Websocket'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(20.0),
+        padding: EdgeInsets.all(1.0),
         child: Center(
           child:
-          new StreamBuilder(
-          stream: _stream(),
-          builder: ( BuildContext context,AsyncSnapshot snapshot){
-            print('snapshot: ${snapshot}');
-            if (snapshot.hasData) {
-              return ListView(
-                children: [],
-              )
-            } else if (snapshot.hasError) {
-            return Text('Error');
-            } else {
-            return Center(child: CircularProgressIndicator());
-            }
+          new ListView.builder(
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Container(
+                  child: Padding(
+                    padding: EdgeInsets.all(17.0),
+                    child: Text(item[index].toString()),
+                  ),
+                  color: Colors.cyan[50],
+                  height: 50,
+                )
 
-          }),
+              );
+            },
+            itemCount: item.length,
+          )
+          // StreamBuilder<String>(
+          // stream: _stream(),
+          // builder: (BuildContext context,
+          //     AsyncSnapshot<String> snapshot){
+          //   print('snapshot: ${snapshot.data}');
+          //   print('snapshot4: ${item}');
+          //   if (snapshot.connectionState == ConnectionState.waiting) {
+          //     return CircularProgressIndicator();
+          //   } else if (snapshot.connectionState == ConnectionState.active
+          //       || snapshot.connectionState == ConnectionState.done) {
+          //     if (snapshot.hasError) {
+          //       return const Text('Error');
+          //     } else if (snapshot.hasData) {
+          //       return Text(
+          //           snapshot.data.toString(),
+          //           style: const TextStyle(color: Colors.red, fontSize: 40)
+          //       );
+          //     } else {
+          //       return
+          //     }
+          //   } else {
+          //     return Text('State: ${snapshot.connectionState}');
+          //   }
+          // }),
         )
       ),
     );
   }
-  // ListView getMessageList() {
-  //   List<Widget> listWidget = [];
-  //
-  //   for (String message in messageList) {
-  //     listWidget.add(ListTile(
-  //       title: Container(
-  //         child: Padding(
-  //           padding: const EdgeInsets.all(8.0),
-  //           child: Text(
-  //             message,
-  //             style: TextStyle(fontSize: 22),
-  //           ),
-  //         ),
-  //         color: Colors.teal[50],
-  //         height: 60,
-  //       ),
-  //     ));
-  //   }
-  //
-  //   return ListView(children: listWidget);
-  // }
 }
-

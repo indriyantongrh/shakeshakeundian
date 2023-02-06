@@ -19,7 +19,7 @@ class Pesertaview extends StatefulWidget {
 }
 
 class _PesertaviewState extends State<Pesertaview> {
-  String pesan = "tesss";
+  String pesan = "";
   TextEditingController _controller = TextEditingController();
   // final channel = IOWebSocketChannel.connect('wss://socketsbay.com/wss/v2/1/ef185f1dbb2ee3381a51f42c0ff665a0/');
   final channel = IOWebSocketChannel.connect('ws://socketsbay.com/wss/v2/1/ef185f1dbb2ee3381a51f42c0ff665a0/');
