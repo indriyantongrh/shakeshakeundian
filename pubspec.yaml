@@ -40,6 +40,7 @@ dependencies:
   google_fonts: ^3.0.1
   piesocket_channels: ^1.0.2
   web_socket_channel: ^2.3.0
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:
@@ -69,7 +70,7 @@ flutter:
     - assets/bgstart.svg
     - assets/bgstart.png
     - assets/bgfinishv2.svg
-#     - assets/a_dot_ham.jpeg
+    - assets/bgundian.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

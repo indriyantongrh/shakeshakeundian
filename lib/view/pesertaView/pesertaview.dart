@@ -19,7 +19,7 @@ class Pesertaview extends StatefulWidget {
 }
 
 class _PesertaviewState extends State<Pesertaview> {
-  String pesan = "";
+  String pesan = "Connected";
   TextEditingController _controller = TextEditingController();
   // final channel = IOWebSocketChannel.connect('wss://socketsbay.com/wss/v2/1/ef185f1dbb2ee3381a51f42c0ff665a0/');
   final channel = IOWebSocketChannel.connect('ws://socketsbay.com/wss/v2/1/ef185f1dbb2ee3381a51f42c0ff665a0/');
@@ -118,7 +118,13 @@ class _PesertaviewState extends State<Pesertaview> {
 
                   new Form(
                       child: new TextField(
-                        decoration:  new InputDecoration( labelText: 'masukan massage'),
+                        decoration: InputDecoration(
+                          labelText: 'masukan massage',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+
+                          )
+                        ),
                         controller: _controller,
                       )
                   ),
@@ -134,6 +140,7 @@ class _PesertaviewState extends State<Pesertaview> {
                           onTap: (){
                             setState(() {
                               sendData();
+                              _controller.clear();
                             });
                           },
                           child: Text(
